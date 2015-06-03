@@ -409,6 +409,63 @@
               <small>(service-name: file)</small>
             </h3>
 
+            <p>The file upload service is used to upload a file for the current session to the server (i.e., a model file or a csv file).
+              The files have to be defined within a <code>&lt;form&gt;</code>-element.</p>
+            <div class="highlight">
+<pre><code class="language-html" data-lang="html"><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"myForm"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"modelFile"</span><span class="nt">&gt;</span>Label<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"file"</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"modelFile"</span> <span class="na">required</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span></code></pre>
+            </div>
+
+            <p>The loading of the file can be simply performed by passing the <code>FormData</code> to the server.
+              Additional information, like the session-identifier, should be appended to the <code>FormData</code>.
+              The uploading process can be observed using the <code>progress</code> event. The following code-snippet
+              shows an example.</p>
+            <div class="highlight">
+<pre><code class="language-js" data-lang="js"><span class="nx"><span class="kd">var</span> formData = <span class="kd">new</span> FormData(form.get(0));</span>
+<span class="nx">formData.append(<span class="s1">'sessionId'</span>, <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span>);</span>
+<span class="nx">$.ajax({</span>
+  <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/loader/file'</span>,</span>
+  <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span>,</span>
+  <span class="nx"><span class="kd">xhr:</span> <span class="kd">function</span>() { <span class="c1">// custom XMLHttpRequest</span></span>
+    <span class="nx"><span class="kd">var</span> xhr = $.ajaxSettings.xhr(); <span class="c1">// check if upload property exists</span></span>
+    <span class="nx"><span class="kd">if</span> (xhr.upload) {</span>
+      <span class="nx">xhr.upload.addEventListener(<span class="s1">'progress'</span>, <span class="kd">function</span>(event) {</span>
+        <span class="c1">// if we want to handle upload size: event.loaded vs. event.total</span>
+        <span class="c1">// the upload is done when event.lengthComputable is false</span>
+      <span class="nx">}, <span class="kc">false</span>);</span>
+    <span class="nx">}</span>
+    <span class="nx"><span class="kd">return</span> xhr;</span>
+  <span class="nx">},</span>
+  <span class="nx"><span class="kd">success:</span> <span class="kd">function</span>(data, textStatus, jqXHR) {</span>
+    <span class="nx">callback(true, data);</span>
+  <span class="nx">},</span>
+  <span class="nx"><span class="kd">error:</span> <span class="kd">function</span>(jqXHR, textStatus, errorThrown) {</span>
+    <span class="nx">callback(<span class="kc">false</span>, { <span class="kd">error:</span> $.parseJSON(jqXHR.responseText) });</span>
+  <span class="nx">},</span>
+  <span class="nx"><span class="kd">data:</span> formData, <span class="c1">// form data</span></span>
+  <span class="c1">// options to tell jQuery not to process data or worry about content-type</span>
+  <span class="nx"><span class="kd">cache:</span> <span class="kc">false</span>,</span>
+  <span class="nx"><span class="kd">contentType:</span> <span class="kc">false</span>,</span>
+  <span class="nx"><span class="kd">processData:</span> <span class="kc">false</span></span>
+<span class="nx">})</span></code></pre>
+            </div>
+
+            <p>The upload service returns an JSON-object, which contains several information about the uploaded files.
+              The most important information, is the used name of each file on server-side. Whenever the files are used
+              within a next call, each file has to be referred by the returned filename.</p>
+
+<pre><code class="language-js" data-lang="js">[{
+  <span class="nx"><span class="kd">fileName:</span> <span class="s1">'afa47982-671b-4c45-bdb4-a03c4d7710b3'</span>,</span>
+  <span class="nx"><span class="kd">fromField:</span> <span class="s1">'file'</span>,</span>
+  <span class="nx"><span class="kd">orgFile:</span> <span class="s1">'model.xml'</span></span>
+<span class="nx">}]</span></code></pre>
+
+            <p>The service may fail, if the request does not authorize itself by presenting a valid <code>sessionId</code>.
+              The service can also fail, if the upload or the storage of the file on server-side fails, e.g., if no space
+              is available.</p>
+
             <!-- Query Services -->
             <h2 id="js-query">Query Services
               <small>(url: /query)</small>

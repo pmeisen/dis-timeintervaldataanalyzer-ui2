@@ -87,6 +87,26 @@ h2[id], h3[id], h4[id] {
   color: #069;
 }
 
+.nt {
+  color: #2f6f9f;
+}
+
+.na {
+  color: #4f9fcf;
+}
+
+.s {
+  color: #d44950;
+}
+
+.c1 {
+  color: #999;
+}
+
+.kc {
+  color: #069;
+}
+
 .btn-clipboard {
   position: absolute;
   top: 0;
