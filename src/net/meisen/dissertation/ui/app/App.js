@@ -47,6 +47,11 @@ require([
              docs,
              error) {
 
+  // make sure tests will work and we don't redirect
+  if (window.location.href.indexOf('runTests', this.length - 'runTests'.length) !== -1) {
+    return;
+  }
+
   // get the current page
   var $body = $('body');
   var type = $body.attr('data-type');
