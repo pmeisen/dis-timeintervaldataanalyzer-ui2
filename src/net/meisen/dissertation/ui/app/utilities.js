@@ -12,6 +12,22 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
       }
     },
 
+    setupNav: function ($navbar) {
+      var session = model.session.getCurrent();
+      if (model.session.validate(session)) {
+        this.appendLogout();
+        $navbar.find('[data-session="needed"]').removeClass('hide');
+      } else {
+        $navbar.find('[data-session="needed"]').addClass('hide');
+      }
+
+      if (this.isWebsite()) {
+        $navbar.find('[data-website="needed"]').removeClass('hide');
+      } else {
+        $navbar.find('[data-website="needed"]').addClass('hide');
+      }
+    },
+
     getError: function (error) {
 
       if (error instanceof Error) {

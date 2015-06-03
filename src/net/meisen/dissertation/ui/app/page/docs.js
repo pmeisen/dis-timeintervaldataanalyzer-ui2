@@ -1,22 +1,11 @@
-define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertation/ui/app/utilities'], function ($, model, util) {
+define(['jquery', 'net/meisen/dissertation/ui/app/utilities'], function ($, util) {
 
   return function () {
 
     // check if we can logout, i.e. if a session is available
-    var session = model.session.getCurrent();
-    if (model.session.validate(session)) {
-      util.appendLogout();
-      $('.navbar [data-session="needed"]').removeClass('hide');
-    } else {
-      $('.navbar [data-session="needed"]').addClass('hide');
-    }
+    util.setupNav($('.navbar'));
 
-    if (util.isWebsite()) {
-      $('.navbar [data-website="needed"]').removeClass('hide');
-    } else {
-      $('.navbar [data-website="needed"]').addClass('hide');
-    }
-
+    // add the scrollspy to make the menu on the left nicer
     $('body').scrollspy({target: '#navbarContent'});
   };
 });
