@@ -5,7 +5,8 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
     isWebsite: function () {
       var href = window.location.href;
       if (href.indexOf('http://tida.meisen.net/') == 0 ||
-        href.indexOf('http://timedata.meisen.net/') == 0) {
+          href.indexOf('http://tida.lifestripes.de/') == 0 ||
+          href.indexOf('http://timedata.meisen.net/') == 0) {
         return true;
       } else {
         return false;
