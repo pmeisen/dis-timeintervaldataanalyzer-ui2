@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- 
+  This project uses the ant-processenabler to build, deploy, assemble, ...
+  The ant-processenabler can be found under:
+  - https://github.com/pmeisen/ant-processenabler
+  - git://github.com/pmeisen/ant-processenabler.git
+  The fully packed 'application' is available here;
+  - http://ant-processenabler.meisen.net/downloads/ant-processenabler-TRUNK-SNAPSHOT.zip
+  -->
+<project name="dis-timeintervaldataanalyzer-ui2">
+  <property name="main.import.library.javascript" value="true" />
+	<import file="${ant.home}\resources\ant\library_main.xml"/>
+  
+  <property name="tidaServer.http.port" value="10001" />
+  <property name="tidaServer.control.port" value="10002" />
+  <property name="tidaServer.tsql.port" value="10003" />
+  
+  <macrodef name="resourceMapper">
+    <attribute name="resourceFolder" />
+    <attribute name="resourceFileName" />
+    <attribute name="resource" />
+    <attribute name="resourceType" />
+    
+    <sequential>
+      
+      <!-- remove any ExampleApp.js files -->
+      <if>
+        <and>
+          <equals arg1="@{resourceType}" arg2="${build.resource.builtLibrary}" />
+          <equals arg1="@{resourceFileName}" arg2="ExampleApp.js" />
+        </and>
+        <then>
+          <var name="resMapper.skip" value="true" />
+        </then>
+        <elseif>
+          <equals arg1="@{resourceType}" arg2="${build.resource.dependency}" />
+          <then>
+            <var name="resMapper.excludeFiles" value="**/ExampleApp.js" />
+          </then>
+        </elseif>
+      </if>
+    </sequential>
+  </macrodef>
+  
+  <!-- we also have to copy the dependencies of the tidaServer -->
+  <target name="createDevEnv">
+    <javascriptCreateDevEnv />
+    <javascriptResolveServerDependencies serverDependencyDir="${javascript.srvdir}/tidalibs" 
+                                         serverPomFile="${test.srcdir}/tidaServerSettings/tidaPom.xml" />
+  </target>
+  
+  <!-- we also want to start a tidaServer -->
+  <target name="startDevEnv" depends="createDevEnv">
+
+    <javascriptStartServer timeout="30000">
+      <task>
+      
+        <fileset id="project.tmp.tidaLibraries" dir="${javascript.srvdir}/tidalibs">
+          <include name="**/*.jar"/>
+        </fileset>
+        
+        <serverGenericStart appPort="${tidaServer.http.port}" port="${tidaServer.control.port}" 
+                            classpathId="project.tmp.tidaLibraries" serverClass="net.meisen.dissertation.server.TidaServer"
+                            appServerSettings="${test.srcdir}/tidaServerSettings/tidaConfig.xml" renameServerSettings="false" />
+        
+        <!-- wait for the server to be shut-down, or after 10 days -->
+        <waitfor maxwait="864000" maxwaitunit="second" checkevery="1">
+          <not><socket server="localhost" port="${tidaServer.control.port}"/></not>
+        </waitfor>
+        
+        <!-- give it another second after shutdown -->
+        <sleep seconds="1" />
+      </task>
+    </javascriptStartServer>
+  </target>
+
+  <target name="stopDevEnv">
+    <serverGenericStop port="${tidaServer.control.port}" message="SHUTDOWN" />
+    <javascriptStopServer />
+  </target>
+</project>

@@ -1,0 +1,13 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.bs-callout {
+  background-color: #fff;
+}
+
+.glyphicon {
+  font-size: 2em;
+}

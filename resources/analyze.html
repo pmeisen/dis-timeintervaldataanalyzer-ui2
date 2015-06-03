@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>TidaIs - Analyze</title>
+
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="scripts/css/bootstrap.css" rel="stylesheet">
+    <link href="css/ui.css" rel="stylesheet">
+    <link href="css/analyze.css" rel="stylesheet">
+
+    <script data-main="scripts/net/meisen/dissertation/ui/app/App" src="scripts/require.js" type="text/javascript"></script>
+  </head>
+  <body data-page="analyze" data-type="session">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span style="font-variant:small-caps;">TidaUI</span></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="main.html">Home</a></li>
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#modalLogout">Logout</a></li>
+            <li class="dropdown" data-session="needed">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" data-toggle="modal" data-target="#modalSessionInfo">Show session info</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- add the main-page area -->
+    <div class="container-fluid">
+
+      <!-- navigation bar -->
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="#" data-target="#modelmanagement">Model Management</a></li>
+            <li><a href="#" data-target="#datamanagement">Data Management</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="#" data-target="#usermanagement">User Management</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="#" data-target="#analytics">Analytics</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!--toggle sidebar button-->
+      <p class="nav-sidebar-toogle visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+          <i class="glyphicon glyphicon-chevron-left"></i></button>
+      </p>
+
+      <!-- modelmanagement -->
+      <div id="modelmanagement" class="hide col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Model Management</h1>
+
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <div class="btn-group" role="group" aria-label="add or delete">
+                <button type="button" data-toggle="modal" data-target="#modalAddModel" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="add model">
+                  <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>
+                </button>
+                <button type="button" disabled data-needselect="true" data-toggle="modal" data-target="#modalDeleteModel" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="delete model">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+              </div>
+              <div class="btn-group" role="group" aria-label="load or unload">
+                <button id="btnLoadModel" type="button" disabled data-needselect="true" data-value="!loaded" class="btn btn-default navbar-btn" aria-label="load model">
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </button>
+                <button id="btnUnloadModel" type="button" disabled data-needselect="true" data-value="loaded" class="btn btn-default navbar-btn" aria-label="unload model">
+                  <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div class="btn-group" role="group" aria-label="refresh">
+                <button id="btnRefreshModels" type="button" class="btn btn-default navbar-btn" aria-label="reload models">
+                  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="table-responsive">
+          <table id="tableModels" class="table table-hover">
+            <thead>
+              <tr>
+                <th class="col-xs-8 col-md-8 col-lg-9">model identifier</th>
+                <th class="col-xs-1 hidden-xs hidden-sm col-md-1 col-lg-1 text-center">loaded</th>
+                <th class="col-xs-1 hidden-xs hidden-sm col-md-1 col-lg-1 text-center">autoload</th>
+                <th class="col-xs-2 col-md-2 col-lg-1 text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- datamanagement -->
+      <div id="datamanagement" class="hide col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Data Management</h1>
+
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <div class="btn-group" role="group" aria-label="add">
+                <form class="navbar-form navbar-left" style="padding-left: 0; padding-right: 0" role="search">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      </div>
+                      <input type="text" class="form-control modelSearch" style="width: 300px;" id="inputDataSearch" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="Search models">
+                      <span class="input-group-btn"><button id="btnLoadData" class="btn btn-default" type="button" disabled>
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></button></span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="btn-group" role="group" aria-label="add">
+                <button type="button" disabled title="load data from model" data-toggle="modal" data-target="#modalLoadFromModel" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="load data from model">
+                  <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                </button>
+                <button type="button" disabled title="load data from database" data-toggle="modal" data-target="#modalLoadFromDb" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="load data from database">
+                  <span class="glyphicon glyphicon-oil" aria-hidden="true"></span>
+                </button>
+                <button type="button" disabled title="load data from CSV file" data-toggle="modal" data-target="#modalLoadFromCsv" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="load data from CSV file">
+                  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                </button>
+                <button type="button" disabled title="add single record" data-toggle="modal" data-target="#modalAddUser" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="add single record">
+                  <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div class="btn-group " role="group" aria-label="delete">
+                <button type="button" disabled title="delete selected record" data-needselect="true" data-toggle="modal" data-target="#modalDeleteData" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="delete selected record">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="table-responsive">
+          <table id="tableData" class="table table-hover">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- usermanagement -->
+      <div id="usermanagement" class="hide col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">User Management</h1>
+
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <div class="btn-group" role="group" aria-label="add">
+                <button type="button" data-toggle="modal" data-target="#modalAddUser" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-toggle="modal" data-target="#modalAddRole" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="">
+                  <span class="glyphicon glyphicon-knight" aria-hidden="true"></span>
+                </button>
+              </div>
+              <div class="btn-group" role="group" aria-label="edit or delete">
+                <button type="button" disabled="disabled" data-needselect="true" data-toggle="modal" data-target="" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>
+                <button type="button" disabled="disabled" data-needselect="true" data-toggle="modal" data-target="" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div class="btn-group" role="group" aria-label="refresh">
+                <button id="btnRefreshUsersAndRoles" type="button" class="btn btn-default navbar-btn" aria-label="reload users and roles">
+                  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <table id="tableUsers" class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-xs-10 col-md-10 col-lg-1">user</th>
+                  <th class="col-xs-2 col-md-2 col-lg-1 text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <table id="tableRoles" class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-xs-10 col-md-10 col-lg-1">role</th>
+                  <th class="col-xs-2 col-md-2 col-lg-1 text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- analytics -->
+      <div id="analytics" class="hide col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Analytics</h1>
+
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <div class="btn-group" role="group" aria-label="add or delete">
+                <button id="toggleQuery" type="button" class="btn btn-default navbar-btn" aria-label="toggle query">
+                  <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div id="queryPanel" class="panel panel-default panel-nav hide">
+          <div class="panel-body">
+            <button id="closeQuery" type="button" class="close"><span aria-hidden="true">×</span></button>
+            <label for="queryInput">Query:</label>
+            <textarea class="form-control" rows="3" id="queryInput" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off"></textarea>
+          </div>
+          <div class="panel-footer">
+            <div class="toolbar hidden-xs">
+              <div>
+                <div class="input-group">
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                  <input id="inputModelSearch" type="text" class="form-control modelSearch" style="width: 300px;" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="Search models">
+                </div>
+              </div>
+              <div>
+                <div class="btn-group pull-right">
+                  <button data-action="queryReset" type="button" class="btn btn-default">Reset</button>
+                  <button data-action="queryFire" type="button" class="btn btn-primary">Fire Query</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="toolbar hidden-sm hidden-md hidden-lg">
+              <button data-action="queryFire" type="button" class="btn btn-primary">Fire Query</button>
+              <button data-action="queryReset" type="button" class="btn btn-default">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="highcharts" class="chart hide"></div>
+        <div id="ganttcharts" class="chart hide"></div>
+      </div>
+    </div>
+
+    <!-- add modals for modelmanagement operations -->
+    <div id="modalAddModel" class="modal fade" data-type="operator" aria-labelledby="modalAddModelTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <form id="btnAddModel">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modalAddModelTitle">Add
+                <span style="font-variant:small-caps;">TidaModel</span></h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="modelFile"><span style="font-variant:small-caps;">TidaModel</span> definition</label>
+                <input name="file" type="file" id="modelFile" required>
+              </div>
+              <div class="form-group">
+                <label for="modelAutoload">Define autoload property</label>
+
+                <div><input type="checkbox" id="modelAutoload" checked> autoload model</div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add model</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modalDeleteModel" class="modal fade" data-type="operator" aria-labelledby="modalDeleteModelTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalDeleteModelTitle">Delete
+              <span style="font-variant:small-caps;">TidaModel</span></h4>
+          </div>
+          <div class="modal-body">
+            <p>Do you really want to delete the selected <span style="font-variant:small-caps;">TidaModel</span>. All
+              data will be lost and cannot be recovered.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnDeleteModel" type="button" class="btn btn-danger">Delete model</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalAddUser" class="modal fade" data-type="operator" aria-labelledby="modalAddUserTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalAddUserTitle">Add User</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnAddUser" type="button" class="btn btn-primary">Add user</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalAddRole" class="modal fade" data-type="operator" aria-labelledby="modalAddUserTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalAddRoleTitle">Add Role</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnAddRole" type="button" class="btn btn-primary">Add role</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalLoadFromDb" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalLoadFromDbTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalLoadFromDbTitle">Add Data from Database</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="divLoadDbLoadingIcon" class="text-center">
+              <span style="font-size: 5em" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+            </div>
+            <div id="divLoadDbLoadingFailed" class="hide bs-callout bs-callout-danger">
+              <h4></h4>
+
+              <div></div>
+            </div>
+
+            <form id="formDbData" class="form-horizontal hide">
+              <div class="form-group form-group-sm">
+                <label for="inputDriver" class="col-sm-2 control-label">Driver</label>
+
+                <div class="col-sm-10">
+                  <input type="input" class="form-control" id="inputDriver" placeholder="Driver">
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="inputJdbc" class="col-sm-2 control-label">
+                  <nobr>Jdbc-url</nobr>
+                </label>
+
+                <div class="col-sm-10">
+                  <input type="input" class="form-control" id="inputJdbc" placeholder="Jdbc-url">
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="inputDbUsername" class="col-sm-2 control-label">
+                  <nobr>Username</nobr>
+                </label>
+
+                <div class="col-sm-10">
+                  <input type="input" class="form-control" id="inputDbUsername" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="inputDbPassword" class="col-sm-2 control-label">
+                  <nobr>Password</nobr>
+                </label>
+
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputDbPassword" placeholder="Password">
+                </div>
+              </div>
+
+              <hr/>
+
+              <label for="inputDbQuery">Query:</label>
+              <textarea class="form-control" rows="3" id="inputDbQuery" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off"></textarea>
+
+              <hr/>
+
+              <div id="divDbFields"></div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnLoadFromDb" type="button" class="btn btn-primary" disabled>Add data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalLoadFromModel" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalLoadFromModelTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalLoadFromModelTitle">Add Data from Model</h4>
+          </div>
+          <div class="modal-body">
+            <div id="divLoadModelLoadingIcon" class="hide text-center">
+              <span style="font-size: 5em" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+            </div>
+            <div id="divLoadModelLoadingFailed" class="hide bs-callout bs-callout-danger">
+              <h4></h4>
+
+              <div></div>
+            </div>
+
+            <div id="divModelData"> Do you really want to add the data defined in the model.</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnLoadFromModel" type="button" class="btn btn-primary">Add data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalLoadFromCsv" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalLoadFromCsvTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalLoadFromCsvTitle">Add Data from CSV</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="divLoadCsvLoadingIcon" class="text-center">
+              <span style="font-size: 5em" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+            </div>
+            <div id="divLoadCsvLoadingFailed" class="hide bs-callout bs-callout-danger">
+              <h4></h4>
+
+              <div></div>
+            </div>
+
+            <form id="formCsvData" class="form-horizontal hide">
+              <div class="form-group form-group-sm" style="margin-left: 0; margin-right: 0;">
+                <label for="inputCsvFile">CSV file</label>
+                <input name="file" type="file" id="inputCsvFile" required>
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="inputSeparator" class="col-sm-2 control-label">
+                  <nobr>Separator</nobr>
+                </label>
+
+                <div class="col-sm-10">
+                  <input type="input" value="," class="text-center form-control" id="inputSeparator" style="width: 30px" placeholder="">
+                </div>
+              </div>
+
+              <hr/>
+
+              <div id="divCsvFields"></div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnLoadFromCsv" type="button" class="btn btn-primary" disabled>Add data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalDeleteData" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalDeleteDataTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalDeleteDataTitle">Delete Data from Model</h4>
+          </div>
+          <div class="modal-body">
+            <div id="divDeleteDataLoadingIcon" class="hide text-center">
+              <span style="font-size: 5em" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+            </div>
+            <div id="divDeleteDataLoadingFailed" class="hide bs-callout bs-callout-danger">
+              <h4></h4>
+
+              <div></div>
+            </div>
+
+            <div id="divDeleteData"> Do you really want to delete the selected entry.</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnDeleteDataFromModel" type="button" class="btn btn-primary">Delete data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
