@@ -129,7 +129,9 @@ define([
 
       showData: function (loadId, failId, dataId, btnId) {
         $('#' + loadId).addClass('hide');
-        $('#' + failId).addClass('hide');
+        if (failId != null) {
+          $('#' + failId).addClass('hide');
+        }
         $('#' + dataId).removeClass('hide');
         $('#' + btnId).removeAttr('disabled');
       },
@@ -186,8 +188,8 @@ define([
             $modalLoadFromDb.modal('hide');
             $modalLoadFromDb.attr('data-dorefresh', 'true');
           } else {
-            _ref.showData('divLoadDbLoadingIcon', 'divLoadDbLoadingFailed', 'formDbData', 'btnLoadFromDb');
             _ref.showError('divLoadDbLoadingIcon', 'divLoadDbLoadingFailed', 'btnLoadFromDb', 'Failed to load data in model', data);
+            _ref.showData('divLoadDbLoadingIcon', null, 'formDbData', 'btnLoadFromDb');
           }
         });
       },
@@ -207,13 +209,13 @@ define([
                 $modalLoadFromCsv.modal('hide');
                 $modalLoadFromCsv.attr('data-dorefresh', 'true');
               } else {
-                _ref.showData('divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'formCsvData', 'btnLoadFromCsv');
                 _ref.showError('divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'btnLoadFromCsv', 'Failed to add CSV data', data);
+                _ref.showData('divLoadCsvLoadingIcon', null, 'formCsvData', 'btnLoadFromCsv');
               }
             });
           } else {
-            _ref.showData('divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'formCsvData', 'btnLoadFromCsv');
             _ref.showError('divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'btnLoadFromCsv', 'Failed to upload file to server', data);
+            _ref.showData('divLoadCsvLoadingIcon', null, 'formCsvData', 'btnLoadFromCsv');
           }
         });
       },
@@ -227,8 +229,8 @@ define([
             $modalLoadFromModel.modal('hide');
             $modalLoadFromModel.attr('data-dorefresh', 'true');
           } else {
-            _ref.showData('divLoadModelLoadingIcon', 'divLoadModelLoadingFailed', 'divModelData', 'btnLoadFromModel');
             _ref.showError('divLoadModelLoadingIcon', 'divLoadModelLoadingFailed', 'btnLoadFromModel', 'Failed to load data from model', data);
+            _ref.showData('divLoadModelLoadingIcon', null, 'divModelData', 'btnLoadFromModel');
           }
         });
       },
@@ -247,8 +249,8 @@ define([
             $modalDeleteData.modal('hide');
             $modalDeleteData.attr('data-dorefresh', 'true');
           } else {
-            _ref.showData('divDeleteDataLoadingIcon', 'divDeleteDataLoadingFailed', 'divDeleteData', 'btnDeleteFromModel');
             _ref.showError('divDeleteDataLoadingIcon', 'divDeleteDataLoadingFailed', 'btnDeleteFromModel', 'Failed to delete record from model', data);
+            _ref.showData('divDeleteDataLoadingIcon', null, 'divDeleteData', 'btnDeleteFromModel');
           }
         });
       },
