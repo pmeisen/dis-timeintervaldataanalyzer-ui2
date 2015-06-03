@@ -87,7 +87,11 @@ define([
 
             // the file is uploaded, now we have to add the model
             tidaAPI.loadModelFromFile(model.serverSettings.getCurrent(), model.session.getCurrent(), data[0].fileName, autoload, function (status, data) {
-              tidaAPI.getModels(model.serverSettings.getCurrent(), model.session.getCurrent(), callback);
+              if (status) {
+                tidaAPI.getModels(model.serverSettings.getCurrent(), model.session.getCurrent(), callback);
+              } else {
+                callback(false, data);
+              }
             });
           });
         }, function (status, data) {

@@ -124,7 +124,8 @@ define(['jquery'], function ($) {
     },
 
     loadModelFromFile: function (serverUrl, sessionId, file, autoload, callback) {
-      this.query(serverUrl, this.getSession(sessionId), 'LOAD FROM \'uploaded://' + sessionId + '/' + file + '\' SET autoload=' + autoload, callback);
+      var session = this.getSession(sessionId);
+      this.query(serverUrl, sessionId, 'LOAD FROM \'uploaded://' + session.sessionId + '/' + file + '\' SET autoload=' + autoload, callback);
     },
 
     getUsers: function (serverUrl, sessionId, callback) {
