@@ -1,3 +1,7 @@
+body[data-page] {
+  visibility: hidden;
+}
+
 .navbar .navbar-right a {
   outline: 0;
 }

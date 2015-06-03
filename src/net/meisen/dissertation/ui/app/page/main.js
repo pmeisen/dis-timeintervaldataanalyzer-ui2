@@ -2,6 +2,18 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
 
   return function () {
 
+    console.log(window.location.href);
+
+    // determine what kind of version we are using
+    var href = window.location.href;
+    console.log(href.indexOf('http://localhost'));
+    if (href.indexOf('http://tida.meisen.net/') == 0 ||
+        href.indexOf('http://timedata.meisen.net/') == 0) {
+      $('#server').removeClass('hide');
+    } else {
+      $('#download').removeClass('hide');
+    }
+
     // check if we can logout, i.e. if a session is available
     var session = model.session.getCurrent();
     if (model.session.validate(session)) {

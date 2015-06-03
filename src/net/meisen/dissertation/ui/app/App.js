@@ -35,6 +35,7 @@ require([
   'net/meisen/dissertation/ui/app/page/main',
   'net/meisen/dissertation/ui/app/page/analyze',
   'net/meisen/dissertation/ui/app/page/docs',
+  'net/meisen/dissertation/ui/app/page/download',
   'net/meisen/dissertation/ui/app/page/error'
 ], function ($,
              bootstrap,
@@ -45,6 +46,7 @@ require([
              main,
              analyze,
              docs,
+             download,
              error) {
 
   // make sure tests will work and we don't redirect
@@ -93,4 +95,7 @@ require([
   } else {
     window.location.replace('error.html');
   }
+
+  // show the page in the end
+  $body.css('visibility', 'visible');
 });

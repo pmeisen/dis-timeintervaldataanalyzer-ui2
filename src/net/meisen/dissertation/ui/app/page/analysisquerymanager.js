@@ -22,7 +22,7 @@ define([
     var resize = function () {
       var $highcharts = $('#highcharts');
 
-      if (!$highcharts.hasClass('hide')) {
+      if (!$highcharts.hasClass('hide') && $highcharts.size() > 0) {
         var width = $highcharts.width();
         var height = $highcharts.height();
 
@@ -30,7 +30,7 @@ define([
       }
 
       var $ganttcharts = $('#ganttcharts');
-      if (!$ganttcharts.hasClass('hide')) {
+      if (!$ganttcharts.hasClass('hide') && $ganttcharts.size() > 0) {
         var width = $ganttcharts.width();
         var height = $ganttcharts.height();
 
