@@ -2,3 +2,9 @@ body {
   position: relative;
   margin-top: 60px;
 }
+
+@media (min-width: 768px) {
+  #modalLicense .modal-dialog {
+    width: 830px;
+  }
+}

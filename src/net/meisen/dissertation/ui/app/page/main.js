@@ -16,5 +16,7 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
     } else {
       $('.navbar [data-session="needed"]').addClass('hide');
     }
+
+    util.createLicense($('body'));
   };
 });

@@ -2,10 +2,10 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
 
   return {
 
-    isWebsite: function() {
+    isWebsite: function () {
       var href = window.location.href;
       if (href.indexOf('http://tida.meisen.net/') == 0 ||
-          href.indexOf('http://timedata.meisen.net/') == 0) {
+        href.indexOf('http://timedata.meisen.net/') == 0) {
         return true;
       } else {
         return false;
@@ -125,6 +125,42 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
           callback(status, data);
         }
       });
+    },
+
+    createLicense: function (parent) {
+
+      var modalLicense = '';
+      modalLicense += '<div id="modalLicense" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalLicenseTitle" aria-hidden="true">';
+      modalLicense += '  <div class="modal-dialog">';
+      modalLicense += '    <div class="modal-content">';
+      modalLicense += '      <div class="modal-header">';
+      modalLicense += '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+      modalLicense += '        <h4 class="modal-title" id="modalLicenseTitle">License</h4>';
+      modalLicense += '      </div>';
+      modalLicense += '      <div class="modal-body">';
+      modalLicense += '        <div id="divLicense" style="max-height: 300px; overflow-y: auto;"></div>';
+      modalLicense += '      </div>';
+      modalLicense += '      <div class="modal-footer">';
+      modalLicense += '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+      modalLicense += '      </div>';
+      modalLicense += '    </div>';
+      modalLicense += '  </div>';
+      modalLicense += '</div>';
+
+      var $modalLicense = $(modalLicense);
+      var $license = $modalLicense.find('#divLicense');
+      parent.append($modalLicense);
+
+
+      // add the license loading
+      var _ref = this;
+      $.get((this.isWebsite() ? '' : 'http://tida.meisen.net/') + 'LICENSE.txt')
+        .done(function (responseText) {
+          $license.html(responseText.replace(/(?:\r\n|\r|\n)/g, '<br />'));
+          $license.css('font-family', 'courier new');
+        }).fail(function () {
+          $license.html('Unable to retrieve the license information from the server.');
+        });
     },
 
     appendLogout: function (parent) {

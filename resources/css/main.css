@@ -112,3 +112,13 @@ body {
     line-height: 1.4;
   }
 }
+
+a:focus {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  #modalLicense .modal-dialog {
+    width: 830px;
+  }
+}
