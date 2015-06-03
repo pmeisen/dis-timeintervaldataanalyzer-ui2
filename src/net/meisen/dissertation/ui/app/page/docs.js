@@ -7,5 +7,8 @@ define(['jquery', 'net/meisen/dissertation/ui/app/utilities'], function ($, util
 
     // add the scrollspy to make the menu on the left nicer
     $('body').scrollspy({target: '#navbarContent'});
+
+    // add the license
+    util.createLicense($('body'));
   };
 });

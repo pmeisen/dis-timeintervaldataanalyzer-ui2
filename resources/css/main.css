@@ -116,9 +116,3 @@ body {
 a:focus {
   outline: 0;
 }
-
-@media (min-width: 768px) {
-  #modalLicense .modal-dialog {
-    width: 830px;
-  }
-}

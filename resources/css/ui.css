@@ -40,6 +40,12 @@ body[data-page] {
   }
 }
 
+@media (min-width: 768px) {
+  #modalLicense .modal-dialog {
+    width: 830px;
+  }
+}
+
 .bs-callout {
   padding: 20px;
   margin: 20px 0;
