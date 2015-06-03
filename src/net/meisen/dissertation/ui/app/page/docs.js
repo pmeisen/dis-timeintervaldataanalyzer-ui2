@@ -6,8 +6,11 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
     var session = model.session.getCurrent();
     if (model.session.validate(session)) {
       util.appendLogout();
+      $('.navbar [data-session="notneeded"]').addClass('hide');
+      $('.navbar [data-session="needed"]').removeClass('hide');
     } else {
       $('.navbar [data-session="needed"]').addClass('hide');
+      $('.navbar [data-session="notneeded"]').removeClass('hide');
     }
 
     $('body').scrollspy({target: '#navbarContent'});

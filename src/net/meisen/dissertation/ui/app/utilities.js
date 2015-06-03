@@ -2,6 +2,16 @@ define(['jquery', 'net/meisen/dissertation/ui/app/model', 'net/meisen/dissertati
 
   return {
 
+    isWebsite: function() {
+      var href = window.location.href;
+      if (href.indexOf('http://tida.meisen.net/') == 0 ||
+          href.indexOf('http://timedata.meisen.net/') == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     getError: function (error) {
 
       if (error instanceof Error) {
