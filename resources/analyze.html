@@ -149,7 +149,7 @@
                 <button type="button" disabled title="load data from CSV file" data-toggle="modal" data-target="#modalLoadFromCsv" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="load data from CSV file">
                   <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                 </button>
-                <button type="button" disabled title="add single record" data-toggle="modal" data-target="#modalAddUser" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="add single record">
+                <button type="button" disabled title="add single record" data-toggle="modal" data-target="#modalLoadSingle" data-backdrop="static" class="btn btn-default navbar-btn" aria-label="add single record">
                   <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
                 </button>
               </div>
@@ -520,6 +520,38 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button id="btnLoadFromCsv" type="button" class="btn btn-primary" disabled>Add data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalLoadSingle" data-refresh="modeldata" class="modal fade" data-type="operator" aria-labelledby="modalLoadSingleTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalLoadSingleTitle">Add Single Record</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="divLoadSingleLoadingIcon" class="text-center">
+              <span style="font-size: 5em" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+            </div>
+            <div id="divLoadSingleLoadingFailed" class="hide bs-callout bs-callout-danger">
+              <h4></h4>
+
+              <div></div>
+            </div>
+
+            <form id="formSingleData" class="form-horizontal hide">
+              <div id="divSingleFields"></div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnLoadSingle" type="button" class="btn btn-primary" disabled>Add record</button>
           </div>
         </div>
       </div>
