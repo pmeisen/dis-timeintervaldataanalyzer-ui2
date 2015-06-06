@@ -68,8 +68,13 @@ define([
         this.updateModel(modelId, 'divLoadDbLoadingIcon', 'divLoadDbLoadingFailed', 'formDbData', 'divDbFields', 'btnLoadFromDb');
       },
 
+
       updateCsvModal: function (modelId) {
         this.updateModel(modelId, 'divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'formCsvData', 'divCsvFields', 'btnLoadFromCsv');
+      },
+
+      updateSingleModal: function (modelId) {
+        this.updateModel(modelId, 'divLoadSingleLoadingIcon', 'divLoadSingleLoadingFailed', 'formSingleData', 'divSingleFields', 'btnLoadSingle');
       },
 
       updateModelModal: function (modelId) {
@@ -163,6 +168,10 @@ define([
         this.reset('divLoadCsvLoadingIcon', 'divLoadCsvLoadingFailed', 'formCsvData', 'btnLoadFromCsv', 'divCsvFields');
       },
 
+      resetSingleModal: function () {
+        this.reset('divLoadSingleLoadingIcon', 'divLoadSingleLoadingFailed', 'formSingleData', 'btnLoadSingle', 'divSingleFields');
+      },
+
       resetModelModal: function () {
         this.reset('divLoadModelLoadingIcon', 'divLoadModelLoadingFailed', 'divModelData', 'btnLoadFromModel', null);
       },
@@ -235,10 +244,27 @@ define([
         });
       },
 
+      loadSingleRecord: function (modelId) {
+        var $inputs = $('#formSingleData input');
+        var entries = this.getEntries($inputs);
+
+        var _ref = this;
+        this.showLoading('divLoadSingleLoadingIcon', 'divLoadSingleLoadingFailed', 'formSingleData', 'btnLoadSingle');
+        tidaAPI.insertSingleRecord(model.serverSettings.getCurrent(), model.session.getCurrent(), modelId, entries, function (status, data) {
+          if (status) {
+            var $modalLoadSingle = $('#modalLoadSingle');
+            $modalLoadSingle.modal('hide');
+            $modalLoadSingle.attr('data-dorefresh', 'true');
+          } else {
+            _ref.showError('divLoadSingleLoadingIcon', 'divLoadSingleLoadingFailed', 'btnLoadSingle', 'Failed to insert record', data);
+            _ref.showData('divLoadSingleLoadingIcon', null, 'formSingleData', 'btnLoadSingle');
+          }
+        });
+      },
+
       deleteModelData: function ($table, $row, modelId, recordId) {
         var _ref = this;
         tidaAPI.deleteRecord(model.serverSettings.getCurrent(), model.session.getCurrent(), modelId, recordId, function (status, data) {
-          console.log(status);
           if (status) {
 
             // remove the entry and update the nav
@@ -285,6 +311,23 @@ define([
         });
 
         return structure;
+      },
+
+      getEntries: function ($inputs) {
+        var entries = [];
+
+        $inputs.filter('[data-metatype]').each(function () {
+          var $input = $(this);
+
+          var obj = {
+            id: $input.attr('data-id'),
+            metatype: $input.attr('data-metatype'),
+            value: $input.val()
+          };
+          entries.push(obj);
+        });
+
+        return entries;
       },
 
       initDriversAndUrl: function ($drivers, $url) {

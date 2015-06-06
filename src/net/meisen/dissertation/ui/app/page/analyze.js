@@ -190,6 +190,14 @@ define([
       $('#btnLoadFromModel').click(function () {
         datamanager.loadModelData($('#inputDataSearch').val());
       });
+      var $modalLoadSingle = $('#modalLoadSingle');
+      $modalLoadSingle.on('show.bs.modal', function () {
+        datamanager.resetSingleModal();
+        datamanager.updateSingleModal($('#inputDataSearch').val());
+      });
+      $('#btnLoadSingle').click(function () {
+        datamanager.loadSingleRecord($('#inputDataSearch').val());
+      });
       $('.modal[data-refresh="modeldata"]').on('hidden.bs.modal', function (e) {
         var $this = $(this);
         var refresh = $this.attr('data-dorefresh');

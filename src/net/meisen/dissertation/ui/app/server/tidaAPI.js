@@ -157,6 +157,26 @@ define(['jquery'], function ($) {
       this.get(serverUrl, '/query/system', data, callback);
     },
 
+    insertSingleRecord: function (serverUrl, sessionId, modelId, entries, callback) {
+      var fields = [];
+      var values = [];
+      $.each(entries, function(idx, entry) {
+        fields.push(entry.id);
+
+        var value = entry.value;
+        if (value.trim() == '') {
+          value = 'NULL';
+        } else if (entry.metatype != 'START' && entry.metatype != 'END') {
+          value = '\'' + entry.value + '\'';
+        } else {
+          value = entry.value;
+        }
+        values.push(value);
+      });
+
+      this.query(serverUrl, sessionId, 'INSERT INTO "' + modelId + '" (' + fields.join(',') + ') VALUES (' + values.join(',') + ')', callback);
+    },
+
     insertDbData: function (serverUrl, sessionId, modelId, connection, query, structure, callback) {
       var session = this.getSession(sessionId);
       var data = {
@@ -196,7 +216,7 @@ define(['jquery'], function ($) {
       this.get(serverUrl, '/query/system', data, callback);
     },
 
-    deleteRecord: function(serverUrl, sessionId, modelId, recordId, callback) {
+    deleteRecord: function (serverUrl, sessionId, modelId, recordId, callback) {
       this.query(serverUrl, sessionId, 'DELETE ' + recordId + ' FROM "' + modelId + '"', callback);
     },
 
@@ -256,8 +276,6 @@ define(['jquery'], function ($) {
         } catch (e) {
           // nothing to do
         }
-
-        console.log(reason);
 
         callback(false, {error: reason});
       });
