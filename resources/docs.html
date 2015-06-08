@@ -54,16 +54,11 @@
           <!-- Overview -->
           <div class="bs-docs-section">
             <h1 id="js-overview" class="page-header">Overview</h1>
-
           </div>
 
           <!-- Getting Started -->
           <div class="bs-docs-section">
-            <h1 id="js-started" class="page-header">Getting Started</h1>
-
-            <h2 id="js-download">Download the latest Build</h2>
-
-            <h2 id="js-start">The first Start</h2>
+            <h1 id="js-tutorials" class="page-header">Tutorials</h1>
           </div>
 
           <!-- Configuration -->
@@ -147,7 +142,7 @@
   <span class="s1">  'MODEL.*.query',</span>
   <span class="s1">  'MODEL.*.modify',</span>
   <span class="nx">]</span>
-<span class="nx">}</span></code></pre>
+  <span class="nx">}</span></code></pre>
             </div>
 
             <p>The table shows all the attributes of the returned object, describes the meaning, and presents an example
@@ -210,11 +205,11 @@
   <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/auth/login'</span>,</span>
   <span class="nx"><span class="kd">data:</span> { <span class="kd">username:</span> <span class="s1">'username'</span>, <span class="kd">password:</span> <span class="s1">'password'</span> },</span>
   <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span></span>
-<span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
+  <span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
   <span class="nx">callback(<span class="kd">true</span>, data);</span>
-<span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
+  <span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
   <span class="nx">callback(<span class="kd">false</span>, reason);</span>
-<span class="nx">})</span></code></pre>
+  <span class="nx">})</span></code></pre>
             </div>
             <p>The <code>callback</code> function used in the example, must be specified and is used to handle the
               result of the request. In general, the function informs the user when an error occurred or redirects if
@@ -247,7 +242,7 @@
             <div class="highlight">
 <pre><code class="language-js" data-lang="js"><span class="nx">{</span>
   <span class="nx"><span class="kd">sessionId:</span> <span class="kd">null</span></span>
-<span class="nx">}</span></code></pre>
+  <span class="nx">}</span></code></pre>
             </div>
 
             <h4>HowTo Use: jQuery Example</h4>
@@ -258,11 +253,11 @@
   <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/auth/logout'</span>,</span>
   <span class="nx"><span class="kd">data:</span> { <span class="kd">sessionId:</span> <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span> },</span>
   <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span></span>
-<span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
+  <span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
   <span class="nx">callback(<span class="kd">true</span>, data);</span>
-<span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
+  <span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
   <span class="nx">callback(<span class="kd">false</span>, reason);</span>
-<span class="nx">})</span></code></pre>
+  <span class="nx">})</span></code></pre>
             </div>
             <p>The <code>callback</code> function used in the example, must be specified and is used to handle the
               result of the request. In general, the function informs the user when an error occurred or redirects if
@@ -295,7 +290,7 @@
   <span class="nx"><span class="kd">logintime:</span> <span class="s1">'19.05.2015 22:44:14'</span>,</span>
   <span class="nx"><span class="kd">leftTimeoutInMin:</span> <span class="s1">905</span>,</span>
   <span class="nx"><span class="kd">timeoutInMin:</span> <span class="s1">1000</span>,</span>
-<span class="nx">}</span></code></pre>
+  <span class="nx">}</span></code></pre>
             </div>
 
             <h4>HowTo Use: jQuery Example</h4>
@@ -306,11 +301,11 @@
   <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/auth/userinfo'</span>,</span>
   <span class="nx"><span class="kd">data:</span> { <span class="kd">sessionId:</span> <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span> },</span>
   <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span></span>
-<span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
+  <span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
   <span class="nx">callback(<span class="kd">true</span>, data);</span>
-<span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
+  <span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
   <span class="nx">callback(<span class="kd">false</span>, reason);</span>
-<span class="nx">})</span></code></pre>
+  <span class="nx">})</span></code></pre>
             </div>
             <p>The <code>callback</code> function used in the example, must be specified and is used to handle the
               result of the request.</p>
@@ -380,7 +375,7 @@
             <div class="highlight">
 <pre><code class="language-js" data-lang="js"><span class="nx">{</span>
   <span class="nx"><span class="kd">sessionId:</span> <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span></span>
-<span class="nx">}</span></code></pre>
+  <span class="nx">}</span></code></pre>
             </div>
 
             <h4>HowTo Use: jQuery Example</h4>
@@ -391,11 +386,11 @@
   <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/auth/ping'</span>,</span>
   <span class="nx"><span class="kd">data:</span> { <span class="kd">sessionId:</span> <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span> },</span>
   <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span></span>
-<span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
+  <span class="nx">}).done(<span class="kd">function</span>(data, textStatus, jqXHR) {</span>
   <span class="nx">callback(<span class="kd">true</span>, data);</span>
-<span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
+  <span class="nx">}).fail(<span class="kd">function</span>(jqXHR, textStatus, reason) {</span>
   <span class="nx">callback(<span class="kd">false</span>, reason);</span>
-<span class="nx">})</span></code></pre>
+  <span class="nx">})</span></code></pre>
             </div>
             <p>The <code>callback</code> function used in the example, must be specified and is used to handle the
               result of the request.</p>
@@ -409,47 +404,55 @@
               <small>(service-name: file)</small>
             </h3>
 
-            <p>The file upload service is used to upload a file for the current session to the server (i.e., a model file or a csv file).
+            <p>The file upload service is used to upload a file for the current session to the server (i.e., a model
+              file or a csv file).
               The files have to be defined within a <code>&lt;form&gt;</code>-element.</p>
+
             <div class="highlight">
-<pre><code class="language-html" data-lang="html"><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"myForm"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"modelFile"</span><span class="nt">&gt;</span>Label<span class="nt">&lt;/label&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"file"</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"modelFile"</span> <span class="na">required</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span></code></pre>
+<pre><code class="language-html" data-lang="html"><span class="nt">&lt;form</span>
+  <span class="na">id=</span><span class="s">"myForm"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span>
+  <span class="na">for=</span><span class="s">"modelFile"</span><span class="nt">&gt;</span>Label<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"file"</span>
+  <span class="na">type=</span><span class="s">"file"</span>
+  <span class="na">id=</span><span class="s">"modelFile"</span>
+  <span class="na">required</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/form&gt;</span></code></pre>
             </div>
 
             <p>The loading of the file can be simply performed by passing the <code>FormData</code> to the server.
               Additional information, like the session-identifier, should be appended to the <code>FormData</code>.
               The uploading process can be observed using the <code>progress</code> event. The following code-snippet
               shows an example.</p>
+
             <div class="highlight">
 <pre><code class="language-js" data-lang="js"><span class="nx"><span class="kd">var</span> formData = <span class="kd">new</span> FormData(form.get(0));</span>
-<span class="nx">formData.append(<span class="s1">'sessionId'</span>, <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span>);</span>
-<span class="nx">$.ajax({</span>
+  <span class="nx">formData.append(<span class="s1">'sessionId'</span>, <span class="s1">'0aa6b54a-4bc9-4341-8156-6cc82c5a6d33'</span>);</span>
+  <span class="nx">$.ajax({</span>
   <span class="nx"><span class="kd">url:</span> <span class="s1">'http://localhost:10000/loader/file'</span>,</span>
   <span class="nx"><span class="kd">type:</span> <span class="s1">'POST'</span>,</span>
   <span class="nx"><span class="kd">xhr:</span> <span class="kd">function</span>() { <span class="c1">// custom XMLHttpRequest</span></span>
-    <span class="nx"><span class="kd">var</span> xhr = $.ajaxSettings.xhr(); <span class="c1">// check if upload property exists</span></span>
-    <span class="nx"><span class="kd">if</span> (xhr.upload) {</span>
-      <span class="nx">xhr.upload.addEventListener(<span class="s1">'progress'</span>, <span class="kd">function</span>(event) {</span>
-        <span class="c1">// if we want to handle upload size: event.loaded vs. event.total</span>
-        <span class="c1">// the upload is done when event.lengthComputable is false</span>
-      <span class="nx">}, <span class="kc">false</span>);</span>
-    <span class="nx">}</span>
-    <span class="nx"><span class="kd">return</span> xhr;</span>
+  <span class="nx"><span class="kd">var</span> xhr = $.ajaxSettings.xhr(); <span class="c1">// check if upload property exists</span></span>
+  <span class="nx"><span class="kd">if</span> (xhr.upload) {</span>
+  <span class="nx">xhr.upload.addEventListener(<span class="s1">'progress'</span>, <span class="kd">function</span>(event) {</span>
+  <span class="c1">// if we want to handle upload size: event.loaded vs. event.total</span>
+  <span class="c1">// the upload is done when event.lengthComputable is false</span>
+  <span class="nx">}, <span class="kc">false</span>);</span>
+  <span class="nx">}</span>
+  <span class="nx"><span class="kd">return</span> xhr;</span>
   <span class="nx">},</span>
   <span class="nx"><span class="kd">success:</span> <span class="kd">function</span>(data, textStatus, jqXHR) {</span>
-    <span class="nx">callback(true, data);</span>
+  <span class="nx">callback(true, data);</span>
   <span class="nx">},</span>
   <span class="nx"><span class="kd">error:</span> <span class="kd">function</span>(jqXHR, textStatus, errorThrown) {</span>
-    <span class="nx">callback(<span class="kc">false</span>, { <span class="kd">error:</span> $.parseJSON(jqXHR.responseText) });</span>
+  <span class="nx">callback(<span class="kc">false</span>, { <span class="kd">error:</span> $.parseJSON(jqXHR.responseText) });</span>
   <span class="nx">},</span>
   <span class="nx"><span class="kd">data:</span> formData, <span class="c1">// form data</span></span>
   <span class="c1">// options to tell jQuery not to process data or worry about content-type</span>
   <span class="nx"><span class="kd">cache:</span> <span class="kc">false</span>,</span>
   <span class="nx"><span class="kd">contentType:</span> <span class="kc">false</span>,</span>
   <span class="nx"><span class="kd">processData:</span> <span class="kc">false</span></span>
-<span class="nx">})</span></code></pre>
+  <span class="nx">})</span></code></pre>
             </div>
 
             <p>The upload service returns an JSON-object, which contains several information about the uploaded files.
@@ -460,10 +463,12 @@
   <span class="nx"><span class="kd">fileName:</span> <span class="s1">'afa47982-671b-4c45-bdb4-a03c4d7710b3'</span>,</span>
   <span class="nx"><span class="kd">fromField:</span> <span class="s1">'file'</span>,</span>
   <span class="nx"><span class="kd">orgFile:</span> <span class="s1">'model.xml'</span></span>
-<span class="nx">}]</span></code></pre>
+  <span class="nx">}]</span></code></pre>
 
-            <p>The service may fail, if the request does not authorize itself by presenting a valid <code>sessionId</code>.
-              The service can also fail, if the upload or the storage of the file on server-side fails, e.g., if no space
+            <p>The service may fail, if the request does not authorize itself by presenting a valid
+              <code>sessionId</code>.
+              The service can also fail, if the upload or the storage of the file on server-side fails, e.g., if no
+              space
               is available.</p>
 
             <!-- Query Services -->
@@ -490,7 +495,7 @@
           <nav id="navbarContent" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
             <ul class="nav bs-docs-sidenav">
               <li><a href="#js-overview">Overview</a></li>
-              <li><a href="#js-started">Getting Started</a></li>
+              <li><a href="#js-tutorials">Tutorials</a></li>
               <li><a href="#js-configuration">Configuration</a></li>
               <li><a href="#js-querylang">Query Language</a></li>
               <li class="sub"><a href="#js-querylang-ddl">Data Definition Language</a></li>
