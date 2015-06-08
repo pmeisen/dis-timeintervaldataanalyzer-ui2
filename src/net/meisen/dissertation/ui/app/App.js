@@ -17,6 +17,10 @@ requirejs.config({
       deps: ['jquery', 'bootstrap'],
       exports: 'typeahead'
     },
+    'bootstrap-colorpicker': {
+      deps: ['jquery', 'bootstrap'],
+      exports: 'bootstrap-colorpicker'
+    },
     'highcharts': {
       deps: ['jquery'],
       exports: 'highcharts'

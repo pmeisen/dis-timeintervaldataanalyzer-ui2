@@ -241,6 +241,22 @@ define([
       $('button[data-action="queryFire"]').click(function () {
         analysisquerymanager.showResult($queryInput.val());
       });
+      analysisquerymanager.initGanttChartSettings($('#modalGanttChartSettings'), $('#stepGanttChartSettingsSelector'), $('#tableMappings'), $('#selectedGroupDescriptor'),
+        $('#btnAcceptGanttChartSettings'), $('#btnRemoveGanttChartSettings'), $('#btnAddGroupDescriptor'), $('#btnAddMapping'), $('#btnOpenColorPicker'), $('#inputGroupDescriptor'), $('#inputGroupMapper'), function (settings) {
+          analysisquerymanager.showGanttChart($queryInput.val(), settings);
+        });
+      var $modalGanttChartSettings = $('#modalGanttChartSettings');
+      $modalGanttChartSettings.on('show.bs.modal', function () {
+        analysisquerymanager.resetGanttChartSettings($('#stepGanttChartSettingsSelector'), $('#btnAcceptGanttChartSettings'), $('#btnOpenColorPicker'), $('#tableMappings'), $('#selectedGroupDescriptor'));
+      });
+      $('#formGroupSelection').submit(function (event) {
+        $('#inputGroupDescriptor').trigger('addGanttChartGroupDescriptor');
+        return false;
+      });
+      $('#formMappings').submit(function (event) {
+        $('#inputGroupMapper').trigger('addGanttChartMapping');
+        return false;
+      });
 
       // make sure the modals are resetted
       $('.modal').on('hidden.bs.modal', function () {

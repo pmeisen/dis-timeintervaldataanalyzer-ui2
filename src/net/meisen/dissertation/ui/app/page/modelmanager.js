@@ -222,23 +222,23 @@ define([
         data = $.isPlainObject(data) ? data : {};
 
         if (typeof(name) != 'undefined' && name != null) {
-          row.children(':nth-child(1)').text(name);
+          row.children('td:nth-child(1)').text(name);
           data.name = name;
         }
 
         if (typeof(loaded) == 'boolean' && loaded != null) {
-          this.setIcon(row.find(':nth-child(2) span'), loaded);
+          this.setIcon(row.find('td:nth-child(2) span'), loaded);
           data.loaded = loaded;
         }
         if (typeof(autoload) == 'boolean' && autoload != null) {
-          this.setIcon(row.find(':nth-child(3) span'), autoload);
+          this.setIcon(row.find('td:nth-child(3) span'), autoload);
           data.autoload = autoload;
         }
 
         // set the new entity for the object
         row.data('entity', data);
 
-        var operators = row.children(':nth-child(4)');
+        var operators = row.children('td:nth-child(4)');
         if (data.loaded) {
           operators.children('button:nth-child(1)').attr('disabled', 'disabled');
           operators.children('button:nth-child(2)').removeAttr('disabled');

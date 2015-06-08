@@ -10,6 +10,7 @@
 
     <link href="css/reset.css" rel="stylesheet">
     <link href="scripts/css/bootstrap.css" rel="stylesheet">
+    <link href="scripts/css/bootstrap-colorpicker.css" rel="stylesheet">
     <link href="css/ui.css" rel="stylesheet">
     <link href="css/analyze.css" rel="stylesheet">
 
@@ -133,7 +134,7 @@
                       </div>
                       <input type="text" class="form-control modelSearch" style="width: 300px;" id="inputDataSearch" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="Search models">
                       <span class="input-group-btn"><button id="btnLoadData" class="btn btn-default" type="button" disabled>
-                        <span class="glyphicon glyphicon-download" aria-hidden="true"></button></span>
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span></button></span>
                     </div>
                   </div>
                 </form>
@@ -241,9 +242,18 @@
         <nav class="navbar navbar-default navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <div class="btn-group" role="group" aria-label="add or delete">
+              <div class="btn-group" role="group" aria-label="toggle query">
                 <button id="toggleQuery" type="button" class="btn btn-default navbar-btn" aria-label="toggle query">
                   <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div id="highchartsNav" class="btn-group hide" role="group" aria-label="toggle query">
+              </div>
+
+              <div id="ganttchartsNav" class="btn-group hide" role="group" aria-label="toggle query">
+                <button id="ganttChartSettings" title="Gantt-Chart Settings" data-toggle="modal" data-target="#modalGanttChartSettings" data-backdrop="static" type="button" class="btn btn-default navbar-btn" aria-label="Gantt-Chart settings">
+                  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </button>
               </div>
             </div>
@@ -580,6 +590,92 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button id="btnDeleteDataFromModel" type="button" class="btn btn-danger">Delete data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalGanttChartSettings" class="modal fade" data-type="operator" aria-labelledby="modalGanttChartSettingsTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalGanttChartSettingsTitle">Gantt-Chart Settings</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <ul id="stepGanttChartSettingsSelector" class="nav nav-pills nav-justified thumbnail">
+                  <li data-selector="#stepGroupDescriptors"><a href="#">
+                    <h4 class="list-group-item-heading" style="margin-bottom: 0">Define Group</h4>
+                  </a></li>
+                  <li data-selector="#stepColorDefinition"><a href="#">
+                    <h4 class="list-group-item-heading" style="margin-bottom: 0">Define Colors</h4>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="stepGroupDescriptors">
+              <form id="formGroupSelection">
+                <label for="inputGroupDescriptor">Group Descriptors
+                  <small style="font-weight: normal; color: #777;">(click selected below to remove)</small>
+                  :</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </div>
+                  <input id="inputGroupDescriptor" type="text" class="form-control" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="add group descriptor">
+                  <span class="input-group-btn">
+                    <button id="btnAddGroupDescriptor" class="btn btn-default" type="button">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
+
+                <div id="selectedGroupDescriptor">
+
+                </div>
+              </form>
+            </div>
+
+            <div id="stepColorDefinition">
+              <form id="formMappings">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <span><i data-format="hex" id="btnOpenColorPicker" style="display: inline-block; width: 16px; height: 16px; vertical-align: text-top; cursor: pointer;"></i></span>
+                  </div>
+                  <input id="inputGroupMapper" type="text" class="form-control" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="insert comma separated values of group">
+                  <span class="input-group-btn">
+                    <button id="btnAddMapping" class="btn btn-default" type="button">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
+
+                <div id="definedGroups" class="table-responsive">
+                  <table id="tableMappings" class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th class="text-center" style="width: 40px"></th>
+                        <th class="text-center" style="width: 70px">color</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button id="btnRemoveGanttChartSettings" type="button" class="btn pull-left btn-danger">Remove All Groups</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+             <button id="btnAcceptGanttChartSettings" type="button" class="btn btn-primary">Accept Settings</button>
           </div>
         </div>
       </div>
