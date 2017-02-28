@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <model xmlns="http://dev.meisen.net/xsd/dissertation/model"
-       xmlns:advDes="http://dev.meisen.net/xsd/dissertation/model/advancedDescriptors"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        
        xsi:schemaLocation="http://dev.meisen.net/xsd/dissertation/model  http://dev.meisen.net/xsd/dissertation/tidaModel.xsd"
@@ -14,7 +13,7 @@
   
   <meta>
     <descriptors>
-      <resource id="PERSON" />
+      <string id="PERSON" />
       <string id="LOCATION" />
       <integer id="SCREAMS" />
     </descriptors>
@@ -48,7 +47,7 @@
       <entry class="java.lang.String" value="Aachen" />
       <entry class="java.lang.Integer" value="0" />
     </dataset>
-    
+
     <dataset>
       <entry class="java.util.Date" value="03.03.2014 00:00:00" />
       <entry class="java.util.Date" value="03.03.2014 16:19:00" />
@@ -56,7 +55,7 @@
       <entry class="java.lang.String" value="Mönchengladbach" />
       <entry class="java.lang.Integer" value="3" />
     </dataset>
-    
+
     <dataset>
       <entry class="java.util.Date" value="03.03.2014 16:20:00" />
       <entry class="java.util.Date" value="03.03.2014 17:21:00" />
@@ -64,7 +63,7 @@
       <entry class="java.lang.String" value="Undefined" />
       <entry class="java.lang.Integer" value="0" />
     </dataset>
-    
+
     <dataset>
       <entry class="java.util.Date" value="03.03.2014 17:22:00" />
       <entry class="java.util.Date" value="04.03.2014 23:59:00" />
@@ -72,7 +71,7 @@
       <entry class="java.lang.String" value="Aachen" />
       <entry class="java.lang.Integer" value="0" />
     </dataset>
-    
+
     <dataset>
       <entry class="java.util.Date" value="03.03.2014 00:00:00" />
       <entry class="java.util.Date" value="04.03.2014 23:59:00" />
@@ -80,7 +79,7 @@
       <entry class="java.lang.String" value="Aachen" />
       <entry class="java.lang.Integer" value="0" />
     </dataset>
-    
+
     <dataset>
       <entry class="java.util.Date" value="03.03.2014 00:00:00" />
       <entry class="java.util.Date" value="04.03.2014 23:59:00" />

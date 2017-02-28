@@ -1,8 +1,10 @@
-/.idea
+/node_modules
+/bower_components
 /_*
+/www-*
 /override.properties
 /.classpath
 /.project
-/.settings/com.google.gdt.eclipse.core.prefs
-/.settings/com.google.gwt.eclipse.core.prefs
-/test/net/meisen/dissertation/performance/paper/**/*.tidamodel
+/server/lib
+/server/testLib
+/server/tidadata

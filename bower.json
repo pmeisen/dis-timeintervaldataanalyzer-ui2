@@ -1,0 +1,39 @@
+{
+  "name": "dis-tida-ui2",
+  "version": "1.0.16",
+  "description": "JavaScript Tida UI (Version 2)",
+  "authors": [
+    "Philipp Meisen <philipp@meisen.net>"
+  ],
+  "main": "dist/dis-tida-ui2.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmeisen/dis-timeintervaldataanalyzer-ui2",
+    "bump": "git://github.com/pmeisen/dis-timeintervaldataanalyzer-ui2.git"
+  },
+  "keywords": [
+    "time-interval-data",
+    "tida",
+    "analyses",
+    "time",
+    "interval",
+    "time interval"
+  ],
+  "license": "MIT",
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+    "js-gantt": ">=1.0.16",
+    "js-svglibrary": ">=0.5.0",
+    "js-misc": ">=0.0.13",
+    "jquery": "1.11.3",
+    "bootstrap3-typeahead": "4.0.2",
+    "bootstrap-colorpicker": "2.5.1",
+    "highcharts-release": "5.0.7",
+    "almond": "0.3.3",
+    "requirejs": "2.3.3",
+    "qunit": "2.1.1",
+    "bootstrap": "3.3.4",
+    "amplify": "1.1.2"
+  }
+}

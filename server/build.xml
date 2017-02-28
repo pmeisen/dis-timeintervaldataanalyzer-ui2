@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="dis-timeintervaldataanalyzer-ui2">
+    <include file="../../tida-workspace/common-libs/ant-util/util-ant.xml"/>
+
+    <target name="01-resolve-dependencies">
+        <resolve-dependencies/>
+    </target>
+
+    <target name="98-run-server">
+        <java classname="net.meisen.dissertation.server.TidaServer" fork="true">
+            <classpath>
+                <pathelement path="./resources"/>
+                <fileset dir="./lib">
+                    <include name="**/*"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+</project>

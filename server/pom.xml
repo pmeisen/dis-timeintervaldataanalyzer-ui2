@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>unnecessary</groupId>
+    <artifactId>unnecessary</artifactId>
+    <version>1.0.0</version>
+    <name>Sample Server</name>
+    <description>POM for the Sample Server Providing some Data</description>
+    <packaging>zip</packaging>
+
+
+    <!-- the projects dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>net.meisen.dissertation</groupId>
+            <artifactId>net-meisen-dissertation-dis-timeintervaldataanalyzer</artifactId>
+            <version>TRUNK-SNAPSHOT</version>
+        </dependency>
+
+        <!-- add a database driver for testing -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+    </dependencies>
+</project>

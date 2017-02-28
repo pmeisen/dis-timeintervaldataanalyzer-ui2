@@ -5,15 +5,15 @@
         
         xsi:schemaLocation="http://dev.meisen.net/xsd/dissertation/config        http://dev.meisen.net/xsd/dissertation/tidaConfig.xsd">
 
-  <location folder="${javascript.srvdir}/tidadata" />
+  <location folder="tidadata" />
 
   <auth>
     <manager implementation="net.meisen.dissertation.impl.auth.shiro.ShiroAuthManager" />
   </auth>
 
   <server>
-    <http port="${tidaServer.http.port}" timeout="1000" enable="true" />
-    <tsql port="${tidaServer.tsql.port}" enable="true" />
-    <control port="${tidaServer.control.port}" enable="true" />
+    <http port="10000" timeout="1000" enable="true" />
+    <tsql port="10001" enable="true" />
+    <control port="10002" enable="true" />
   </server>
 </config>
