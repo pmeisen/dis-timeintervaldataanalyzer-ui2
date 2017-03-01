@@ -186,7 +186,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: [
-                    {expand: true, flatten: false, cwd: 'dist', src: '**/*', dest: 'www-dist/js'},
+                    {expand: true, flatten: false, cwd: 'dist', src: '**/*.js', dest: 'www-dist/js'},
                     {expand: true, flatten: false, cwd: 'public', src: '**/*', dest: 'www-dist'},
                     {
                         expand: true,
