@@ -19,6 +19,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-publish');
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -131,12 +133,48 @@ module.exports = function (grunt) {
         copy: {
             dep: {
                 files: [
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/js-misc/src', src: '**/*', dest: 'www-root/scripts'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/js-svglibrary/src', src: '**/*', dest: 'www-root/scripts'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/js-gantt/src', src: '**/*', dest: 'www-root/scripts'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/', src: 'bootstrap.css', dest: 'www-root/css'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/fonts/', src: '**/*', dest: 'www-root/fonts'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap-colorpicker/dist/css/', src: 'bootstrap-colorpicker.css', dest: 'www-root/css'}
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/js-misc/src',
+                        src: '**/*',
+                        dest: 'www-root/scripts'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/js-svglibrary/src',
+                        src: '**/*',
+                        dest: 'www-root/scripts'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/js-gantt/src',
+                        src: '**/*',
+                        dest: 'www-root/scripts'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/',
+                        src: 'bootstrap.css',
+                        dest: 'www-root/css'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/fonts/',
+                        src: '**/*',
+                        dest: 'www-root/fonts'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap-colorpicker/dist/css/',
+                        src: 'bootstrap-colorpicker.css',
+                        dest: 'www-root/css'
+                    }
                 ]
             },
             setup: {
@@ -150,9 +188,27 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, flatten: false, cwd: 'dist', src: '**/*', dest: 'www-dist/js'},
                     {expand: true, flatten: false, cwd: 'public', src: '**/*', dest: 'www-dist'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/', src: 'bootstrap.css', dest: 'www-dist/css'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/fonts/', src: '**/*', dest: 'www-dist/fonts'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap-colorpicker/dist/css/', src: 'bootstrap-colorpicker.css', dest: 'www-dist/css'}
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/',
+                        src: 'bootstrap.css',
+                        dest: 'www-dist/css'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/fonts/',
+                        src: '**/*',
+                        dest: 'www-dist/fonts'
+                    },
+                    {
+                        expand: true,
+                        flatten: false,
+                        cwd: bowerPaths.bowerDirectory + '/bootstrap-colorpicker/dist/css/',
+                        src: 'bootstrap-colorpicker.css',
+                        dest: 'www-dist/css'
+                    }
                 ]
             }
         },
@@ -194,6 +250,7 @@ module.exports = function (grunt) {
                     var prefixFilename = currentDir + '/dist/' + grunt.config('pkg.name');
 
                     var baseConfig = {
+                        baseUrl: 'scripts',
                         name: 'almond',
                         include: 'net/meisen/dissertation/ui/app/App',
                         wrap: true,
@@ -201,7 +258,6 @@ module.exports = function (grunt) {
                     };
 
                     var optimize = function (config, callback) {
-
                         requirejs.optimize(config, function () {
                             callback(true);
                         }, function (err) {
@@ -234,6 +290,27 @@ module.exports = function (grunt) {
             }
         },
 
+        compress: {
+            distZip: {
+                options: {
+                    mode: 'zip',
+                    archive: 'dist/<%= pkg.name %>.zip'
+                },
+                files: [
+                    {expand: true, flatten: false, cwd: 'www-dist', src: '**/*', dest: ''}
+                ]
+            },
+            distTgz: {
+                options: {
+                    mode: 'tgz',
+                    archive: 'dist/<%= pkg.name %>.tgz'
+                },
+                files: [
+                    {expand: true, flatten: false, cwd: 'www-dist', src: '**/*', dest: ''}
+                ]
+            }
+        },
+
         publish: {
             options: {
                 ignore: ['node_modules', 'bower_components']
@@ -257,7 +334,8 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('02-compile-sources', 'Update the current root-directory', function () {
-        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'replace:setup', 'execute:compile');
+        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'replace:setup', 'execute:compile',
+            'copy:dist', 'replace:dist', 'compress:distZip', 'compress:distTgz');
     });
 
     grunt.registerTask('04-deploy', 'Update the current root-directory', function () {
@@ -281,10 +359,11 @@ module.exports = function (grunt) {
     grunt.registerTask('99-run-dist-server', 'Runs a server with the dist-version', function (port) {
         port = typeof port === 'undefined' || port === null || isNaN(parseFloat(port)) || !isFinite(port) ? 20000 : parseInt(port);
         grunt.config.set('server.port', port);
-        grunt.config.set('log.msg', 'Test the distribution: http://localhost:' + port + '/testDistributionNoJQuery.html' + '\n' +
-            '                       http://localhost:' + port + '/testDistributionWithJQuery.html');
+        grunt.config.set('log.msg', 'Test the distribution:' + '\n' +
+            '- run the server with ant 98-run-server (see server), and' + '\n' +
+            '- visit http://localhost:' + port + '/index.html');
 
-        grunt.task.run('02-compile-sources', 'copy:dist', 'replace:dist', 'connect:dist', 'log', 'watch:dist');
+        grunt.task.run('02-compile-sources', 'connect:dist', 'log', 'watch:dist');
     });
 
     grunt.registerTask('log', 'Writes a log messages', function () {
