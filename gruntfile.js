@@ -311,15 +311,6 @@ module.exports = function (grunt) {
             }
         },
 
-        publish: {
-            options: {
-                ignore: ['node_modules', 'bower_components']
-            },
-            deploy: {
-                src: './'
-            }
-        },
-
         bump: {
             options: {
                 files: ['package.json', 'bower.json'],
@@ -339,12 +330,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('04-deploy', 'Update the current root-directory', function () {
-        grunt.config.set('log.msg', 'Make sure your bower project is registered using: ' + '\n' +
-            '$ bower register ' + grunt.config('pkg.name') + ' ' + grunt.config('pkg.repository.bump') + '\n' +
-            'Make sure your npm users are added: ' + '\n' +
-            '$ npm adduser');
-
-        grunt.task.run('02-compile-sources', 'log', 'bump', 'publish:deploy');
+        grunt.task.run('02-compile-sources', 'bump');
     });
 
     grunt.registerTask('98-run-server', 'Start the web-server for fast debugging.', function (port) {
