@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-execute');
     grunt.loadNpmTasks('grunt-publish');
     grunt.loadNpmTasks('grunt-bump');
+    grunt.loadNpmTasks('grunt-replace');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -86,7 +87,7 @@ module.exports = function (grunt) {
                 },
 
                 // define the task to run when a change happens
-                tasks: ['01-resolve-dependencies', 'copy:setup'],
+                tasks: ['01-resolve-dependencies', 'copy:setup', 'replace:setup'],
 
                 // files to observe, can be an array
                 files: ['gruntfile.js', 'package.json', 'src/**/*', 'public/**/*', 'test/**/*']
@@ -98,7 +99,7 @@ module.exports = function (grunt) {
                 },
 
                 // define the task to run when a change happens
-                tasks: ['02-compile-sources', 'copy:dist'],
+                tasks: ['02-compile-sources', 'copy:dist', 'replace:dist'],
 
                 // files to observe, can be an array
                 files: ['public/testDistribution*.html', 'src/Optimizer.js']
@@ -147,11 +148,36 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: [
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/jquery/dist', src: 'jquery.min.js', dest: 'www-dist/scripts'},
-                    {expand: true, flatten: false, cwd: 'dist', src: '**/*', dest: 'www-dist/scripts'},
-                    {expand: true, flatten: false, cwd: 'public/css', src: '**/*', dest: 'www-dist/css'},
-                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/bootstrap.min.css', src: '**/*', dest: 'www-dist/css'},
-                    {expand: true, flatten: false, cwd: 'public', src: 'testDistribution*.html', dest: 'www-dist'}
+                    {expand: true, flatten: false, cwd: 'dist', src: '**/*', dest: 'www-dist/js'},
+                    {expand: true, flatten: false, cwd: 'public', src: '**/*', dest: 'www-dist'},
+                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/css/', src: 'bootstrap.css', dest: 'www-dist/css'},
+                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap/dist/fonts/', src: '**/*', dest: 'www-dist/fonts'},
+                    {expand: true, flatten: false, cwd: bowerPaths.bowerDirectory + '/bootstrap-colorpicker/dist/css/', src: 'bootstrap-colorpicker.css', dest: 'www-dist/css'}
+                ]
+            }
+        },
+
+        replace: {
+            setup: {
+                options: {
+                    patterns: [{
+                        match: 'script-injection',
+                        replacement: '<script data-main="scripts/net/meisen/dissertation/ui/app/App" src="scripts/require.js" type="text/javascript"></script>'
+                    }]
+                },
+                files: [
+                    {expand: true, flatten: false, src: ['www-root/*.html'], dest: '.'}
+                ]
+            },
+            dist: {
+                options: {
+                    patterns: [{
+                        match: 'script-injection',
+                        replacement: '<script src="js/dis-tida-ui2.js" type="text/javascript"></script>'
+                    }]
+                },
+                files: [
+                    {expand: true, flatten: false, src: ['www-dist/*.html'], dest: '.'}
                 ]
             }
         },
@@ -168,10 +194,10 @@ module.exports = function (grunt) {
                     var prefixFilename = currentDir + '/dist/' + grunt.config('pkg.name');
 
                     var baseConfig = {
-                        baseUrl: 'scripts',
                         name: 'almond',
                         include: 'net/meisen/dissertation/ui/app/App',
-                        wrap: true
+                        wrap: true,
+                        mainConfigFile: 'scripts/net/meisen/dissertation/ui/app/App.js'
                     };
 
                     var optimize = function (config, callback) {
@@ -231,7 +257,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('02-compile-sources', 'Update the current root-directory', function () {
-        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'execute:compile');
+        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'replace:setup', 'execute:compile');
     });
 
     grunt.registerTask('04-deploy', 'Update the current root-directory', function () {
@@ -249,7 +275,7 @@ module.exports = function (grunt) {
         grunt.config.set('log.msg', 'You may want to start the sample server providing data via JSON, ant 98-run-server (see server)' + '\n' +
             'For an example: http://localhost:' + port + '/index.html');
 
-        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'connect:server', 'log', 'watch:server');
+        grunt.task.run('01-resolve-dependencies', 'copy:setup', 'replace:setup', 'connect:server', 'log', 'watch:server');
     });
 
     grunt.registerTask('99-run-dist-server', 'Runs a server with the dist-version', function (port) {
@@ -258,7 +284,7 @@ module.exports = function (grunt) {
         grunt.config.set('log.msg', 'Test the distribution: http://localhost:' + port + '/testDistributionNoJQuery.html' + '\n' +
             '                       http://localhost:' + port + '/testDistributionWithJQuery.html');
 
-        grunt.task.run('02-compile-sources', 'copy:dist', 'connect:dist', 'log', 'watch:dist');
+        grunt.task.run('02-compile-sources', 'copy:dist', 'replace:dist', 'connect:dist', 'log', 'watch:dist');
     });
 
     grunt.registerTask('log', 'Writes a log messages', function () {

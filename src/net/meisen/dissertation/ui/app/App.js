@@ -1,9 +1,6 @@
 requirejs.config({
-
-    // define the baseUrl defined by the processenabler
     baseUrl: 'scripts',
 
-    // shim amplify it's not AMD conform
     shim: {
         'amplify': {
             deps: ['jquery'],

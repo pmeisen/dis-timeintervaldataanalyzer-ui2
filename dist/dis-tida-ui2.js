@@ -13106,7 +13106,12 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-define("bootstrap", function(){});
+define("bootstrap", ["jquery"], (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.bootstrap;
+    };
+}(this)));
 
 /*!
  * Amplify 1.1.2
@@ -13939,7 +13944,12 @@ amplify.subscribe( "request.before.ajax", function( resource, settings, ajaxSett
 
 }( amplify, jQuery ) );
 
-define("amplify", function(){});
+define("amplify", ["jquery"], (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.amplify;
+    };
+}(this)));
 
 define('net/meisen/dissertation/ui/app/model',['jquery', 'amplify'], function ($, amplify) {
 
@@ -16001,7 +16011,12 @@ b){var c=this,d=c.chart,e=c.legendItem,g,m=d.options.chart.ignoreHiddenSeries,n=
 a)},this)};B.prototype.matchResponsiveRule=function(f,g){var l=this.respRules,q=f.condition,d;d=q.callback||function(){return this.chartWidth<=r(q.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=r(q.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=r(q.minWidth,0)&&this.chartHeight>=r(q.minHeight,0)};void 0===f._id&&(f._id=a.uniqueKey());d=d.call(this);!l[f._id]&&d?f.chartOptions&&(l[f._id]=this.currentOptions(f.chartOptions),this.update(f.chartOptions,g)):l[f._id]&&!d&&(this.update(l[f._id],g),delete l[f._id])};
 B.prototype.currentOptions=function(a){function f(a,d,b,l){var p,q;for(p in a)if(!l&&-1<H(p,["series","xAxis","yAxis"]))for(a[p]=g(a[p]),b[p]=[],q=0;q<a[p].length;q++)b[p][q]={},f(a[p][q],d[p][q],b[p][q],l+1);else G(a[p])?(b[p]={},f(a[p],d[p]||{},b[p],l+1)):b[p]=d[p]||null}var l={};f(a,this.options,l,0);return l}})(L);return L});
 
-define("highcharts", function(){});
+define("highcharts", ["jquery"], (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.highcharts;
+    };
+}(this)));
 
 /*!
  * Bootstrap Colorpicker v2.5.1
@@ -22705,18 +22720,8 @@ define('net/meisen/dissertation/ui/app/page/error',['jquery'], function ($) {
   };
 });
 requirejs.config({
-
-    // define the baseUrl defined by the processenabler
     baseUrl: 'scripts',
 
-    // map: {
-        //'*': {
-            //'jquery': 'jquery-private',
-        //},
-        //'jquery-private': {'jquery': 'jquery'}
-    // },
-
-    // shim amplify it's not AMD conform
     shim: {
         'amplify': {
             deps: ['jquery'],

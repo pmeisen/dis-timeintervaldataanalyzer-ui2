@@ -12,6 +12,7 @@
       <excludeFolder url="file://$MODULE_DIR$/server/lib" />
       <excludeFolder url="file://$MODULE_DIR$/server/testLib" />
       <excludeFolder url="file://$MODULE_DIR$/server/tidadata" />
+      <excludeFolder url="file://$MODULE_DIR$/www-dist" />
       <excludeFolder url="file://$MODULE_DIR$/www-root" />
     </content>
     <orderEntry type="inheritedJdk" />
