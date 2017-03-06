@@ -7,7 +7,7 @@
         <resolve-dependencies/>
     </target>
 
-    <target name="98-run-server">
+    <target name="98-run-server" depends="01-resolve-dependencies">
         <java classname="net.meisen.dissertation.server.TidaServer" fork="true">
             <classpath>
                 <pathelement path="./resources"/>
