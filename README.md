@@ -40,13 +40,13 @@ is available within this project `98-run-server`. When executed, a back-end serv
 3. access the front-end via `http://localhost:20000/login.html`
 4. change the used back-end server via `Change server`
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-change-server.png" alt="Change Server" width="230">
-</p>
+   <p align="center">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-change-server.png" alt="Change Server" width="230">
+   </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-server-settings.png" alt="Server Settings" width="460">
-</p>
+   <p align="center">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-server-settings.png" alt="Server Settings" width="460">
+   </p>
 
 5. login with the username `admin` and the password `password`, the used back-end server is configured to use a `AuthenticationManager`, thus it is necessary to use these credentials
 
