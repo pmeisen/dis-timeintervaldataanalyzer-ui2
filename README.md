@@ -19,6 +19,8 @@ is available within this project `98-run-server`. When executed, a back-end serv
 
 1. start the front-end with `grunt`: `98-run-server` (the server will restart automatically if files are changed and a restart is needed)
 
+   **Note**: It may be necessary to restart the front-end server manually, if the dependencies are changed.
+
    <p align="center">
      <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/intellij-grunt-run-server.png" alt="Start UI server" width="300">
    </p>
@@ -49,7 +51,5 @@ is available within this project `98-run-server`. When executed, a back-end serv
    </p>
 
 5. login with the username `admin` and the password `password`, the used back-end server is configured to use a `AuthenticationManager`, thus it is necessary to use these credentials
-
-**Note**: It may be necessary to restart the server manually, if the dependencies are changed.
 
 Further documentation regarding the usage of the available `grunt-tasks`, `troubleshooting`, and many more may be added in the future.
