@@ -20,32 +20,32 @@ is available within this project `98-run-server`. When executed, a back-end serv
 1. start the front-end with `grunt`: `98-run-server` (the server will restart automatically if files are changed and a restart is needed)
 
    <p align="center">
-     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/intellij-grunt-run-server.png" alt="Start UI server" width="300">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/intellij-grunt-run-server.png" alt="Start UI server" width="300">
    </p>
 
    <p align="center">
-     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/intellij-grunt-started.png" alt="Started UI server" width="460">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/intellij-grunt-started.png" alt="Started UI server" width="460">
    </p>
 
 2. start the back-end with `ant`: `98-run-server`
 
    <p align="center">
-     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/intellij-ant-run-server.png" alt="Start back-end server" width="300">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/intellij-ant-run-server.png" alt="Start back-end server" width="300">
    </p>
    
    <p align="center">
-     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/intellij-ant-started.png" alt="Started back-end server" width="600">
+     <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/intellij-ant-started.png" alt="Started back-end server" width="600">
    </p>
    
 3. access the front-end via `http://localhost:20000/login.html`
 4. change the used back-end server via `Change server`
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/tida-change-server.png" alt="Change Server" width="230">
+  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-change-server.png" alt="Change Server" width="230">
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui/master/docs/tida-server-settings.png" alt="Server Settings" width="460">
+  <img src="https://raw.githubusercontent.com/pmeisen/dis-timeintervaldataanalyzer-ui2/master/docs/tida-server-settings.png" alt="Server Settings" width="460">
 </p>
 
 5. login with the username `admin` and the password `password`, the used back-end server is configured to use a `AuthenticationManager`, thus it is necessary to use these credentials
