@@ -22,6 +22,7 @@ define([
         // regular expressions to check what type of query we have
         var timeSeriesRegExp = /^\s*select\s+timeseries/i;
         var intervalRegExp = /^\s*select\s+records/i;
+        var countRegExp = /^\s*select\s*count\(records\)/i;
 
         var resize = function () {
             var $highcharts = $('#highcharts');
@@ -49,10 +50,13 @@ define([
 
         return {
             showResult: function (query) {
+                console.log(query);
                 if (timeSeriesRegExp.test(query)) {
                     this.showTimeSeries(query);
                 } else if (intervalRegExp.test(query)) {
                     this.showGanttChart(query);
+                } else if (countRegExp.test(query)) {
+                    this.showCountResult(query);
                 } else {
                     this.clean();
                 }
@@ -137,6 +141,8 @@ define([
                         return;
                     }
 
+                    console.log(data);
+
                     var $container = $('#ganttcharts');
                     var $ganttchart = $('<div id="graph"></div>');
                     $ganttchart.appendTo($container);
@@ -212,6 +218,31 @@ define([
                     // show it and resize
                     $container.removeClass('hide');
                     $('#ganttchartsNav').removeClass('hide');
+                    resize();
+
+                }, 'Waiting for response to query...');
+            },
+
+            showCountResult: function(query) {
+                this.clean();
+
+                var _ref = this;
+                util.handleLoading(function (callback) {
+                    tidaAPI.query(model.serverSettings.getCurrent(), model.session.getCurrent(), query, callback);
+                }, function (status, data) {
+                    if (!status) {
+                        return;
+                    }
+
+                    var $container = $('#textoutputmeike');
+                    $container.empty();
+
+                    var $textcontainer = $('<div id="textoutput"></div>');
+                    $textcontainer.appendTo($container);
+                    $textcontainer.text('The count is ' + data.result[0][0] + '.');
+
+                    // show it and resize
+                    $container.removeClass('hide');
                     resize();
 
                 }, 'Waiting for response to query...');

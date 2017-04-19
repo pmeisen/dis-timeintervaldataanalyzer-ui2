@@ -257,14 +257,17 @@ define(['jquery'], function ($) {
     },
 
     get: function (serverUrl, url, data, callback) {
+      debugger;
       $.ajax({
         dataType: 'json',
         url: serverUrl + url,
         data: data,
         type: 'POST'
       }).done(function (data, textStatus, jqXHR) {
+        debugger;
         callback(true, data);
       }).fail(function (jqXHR, textStatus, reason) {
+        debugger;
 
         // check if we have an additional error message
         var message;
